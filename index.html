@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link href="styles.css" rel="stylesheet">
+        <title>Trivia!</title>
+
+        <script>
+            function checkMultipleChoiceAnswer(correctIndex, selectedButton) {
+                var buttons = document.querySelectorAll('.button-01');
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].disabled = true; // Desabilita todos os botões após clicar em um
+                }
+                var responseText = '';
+                for (var i = 0; i < buttons.length; i++) {
+                    buttons[i].style.backgroundColor = ''; // Limpa a cor de fundo de todos os botões
+                }
+                if (selectedButton === correctIndex) {
+                    responseText = 'Correto!';
+                    buttons[correctIndex].style.backgroundColor = 'green'; // Corrigindo a cor do botão correto
+                } else {
+                    responseText = 'Incorreto';
+                }
+                var responseElement = buttons[0].parentNode.querySelector('.response');
+                responseElement.textContent = responseText;
+            }
+
+    
+            function checkOpenQuestionAnswer() {
+                var input = document.querySelector('.section input');
+                var userAnswer = input.value.trim().toLowerCase();
+                var responseElement = input.parentNode.querySelector('.response');
+    
+                if (userAnswer === 'debut, fearless, speaknow, red, 1989, reputation, lover, folklore, evermore, midnights') {
+                    responseElement.textContent = 'Correto!';
+                    responseElement.style.color = 'green';
+                } else {
+                    responseElement.textContent = 'Incorreto';
+                    responseElement.style.color = 'red';
+                }
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1>Trivia - Taylor Swift!</h1>
+            <img src="taylor.jpg" class="imagem-taylor">
+        </div>
+
+        <div class="container">
+
+            <div class="section">
+                <h2>Parte 1: Multipla escolha </h2>
+                <hr>
+                <h3>The Eras Tour é a sexta turnê em curso da cantora e compositora estadunidense Taylor Swift, que o descreveu como uma homenagem às "eras musicais" de sua discografia. Quantas eras são apresentadas nessa turnê? </h3>
+                <button onclick="checkMultipleChoiceAnswer(4, 0)" class="button-01">5 Eras</button>
+                <button onclick="checkMultipleChoiceAnswer(4, 1)" class="button-01">7 Eras</button>
+                <button onclick="checkMultipleChoiceAnswer(4, 2)" class="button-01">10 Eras</button>
+                <button onclick="checkMultipleChoiceAnswer(4, 3)" class="button-01">8 Eras</button>
+                <button onclick="checkMultipleChoiceAnswer(4, 4)" class="button-01">9 Eras</button>
+                <p class="response"></p>
+
+            </div>
+
+            <div class="section">
+                <h2>Parte 2: Pergunta aberta</h2>
+                <hr>
+                <h3>Taylor Alison Swift é uma cantora e compositora considerada uma das maiores. Quais são seus álbuns em ordem de lançamento? </h3>
+                <input>
+                <button onclick="checkOpenQuestionAnswer()">Enviar</button>
+                <p class="response"></p>
+            </div>
+
+        </div>
+    </body>
+</html>
